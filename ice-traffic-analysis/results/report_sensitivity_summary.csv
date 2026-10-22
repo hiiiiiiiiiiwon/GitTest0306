@@ -1,0 +1,6 @@
+﻿comparison,spearman_vs_report_300m,top6_overlap
+bus_100m,0.7225246371244334,5
+bus_500m,0.9156154849934754,4
+jan_daily,0.9973901696389734,6
+feb_daily,1.0,6
+day_weighted_daily,1.0,6

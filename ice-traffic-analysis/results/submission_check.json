@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "verified_input_files": 4,
+  "areas": 24,
+  "checks": [
+    "input SHA-256",
+    "unique stop-month keys",
+    "finite nonnegative ridership",
+    "finite coordinates",
+    "24 area IDs",
+    "78 crash records",
+    "116 casualty records",
+    "report spatial sums",
+    "hospital distances",
+    "nested distance totals"
+  ],
+  "sensitivity": [
+    {
+      "comparison": "bus_100m",
+      "spearman_vs_report_300m": 0.7225246371244334,
+      "top6_overlap": 5
+    },
+    {
+      "comparison": "bus_500m",
+      "spearman_vs_report_300m": 0.9156154849934754,
+      "top6_overlap": 4
+    },
+    {
+      "comparison": "jan_daily",
+      "spearman_vs_report_300m": 0.9973901696389734,
+      "top6_overlap": 6
+    },
+    {
+      "comparison": "feb_daily",
+      "spearman_vs_report_300m": 1.0,
+      "top6_overlap": 6
+    },
+    {
+      "comparison": "day_weighted_daily",
+      "spearman_vs_report_300m": 1.0,
+      "top6_overlap": 6
+    }
+  ],
+  "scope": "Spatial sums include polygon interior and points within the specified exterior distance. Common-month stops only. Correlations describe ridership rankings, not management priorities or causal effects.",
+  "carbon": "No measured fuel/electricity data; no emissions reduction estimate."
+}

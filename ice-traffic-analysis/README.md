@@ -12,6 +12,7 @@ Python 3.12에서 검증했습니다. 이 폴더에서 실행하세요.
 python -m pip install -r requirements.txt
 python scripts/build_report.py
 python scripts/run_ai.py
+python scripts/check_submission.py
 ```
 
 한글 그래프에는 맑은 고딕(Windows), 나눔고딕(Linux) 또는 Apple SD Gothic Neo(macOS)가 필요합니다. Linux에서는 `fonts-nanum`을 설치할 수 있습니다. 입력 데이터가 포함되어 있으므로 API 인증키나 로그인이 필요하지 않습니다.
@@ -23,6 +24,9 @@ python scripts/run_ai.py
 - [보고서 그림](results/report_figure.svg). 실행 시 PNG·PDF도 생성됩니다.
 - [AI 검증 결과](results/ai/검증결과.json).
 - [군집 수 비교](results/ai/군집수_비교.csv), [거리 기준 민감도](results/ai/거리기준_민감도.csv).
+- [제출 전 검증 기록](results/submission_check.json): 입력 파일 무결성·결과 수치·공간 집계 확인.
+- [최종 보고서 기준 민감도](results/report_sensitivity_summary.csv), [지역별 비교 수치](results/report_sensitivity_values.csv): 거리·월·월별 가중 방식에 따른 이용 규모 비교.
+- [검증 범위와 해석 안내](VALIDATION.md).
 
 ![사고건수 분포와 주변 버스 이용 규모](results/report_figure.svg)
 
@@ -40,7 +44,7 @@ python scripts/run_ai.py
 
 1. 2021~2025년 집계자료 중 서울 사고지역 24곳을 사용합니다. 서로 중첩되는 집계기간은 합산하지 않습니다. 공식 다발지역 선정 기준은 반경 200m 내 결빙 사고 3건 이상(사망사고 포함 시 2건 이상)입니다.
 2. 좌표를 EPSG:5179로 변환합니다. 사고 폴리곤과 정류소 원좌표는 EPSG:4326, 병원 좌표는 EPSG:5174입니다.
-3. 사고지역 폴리곤 **경계로부터 300m 이내** 정류소를 추출합니다. 원자료 폴리곤에 300m를 추가하는 기준이며 중심점 반경 300m와 다릅니다.
+3. 사고지역 **폴리곤 내부 및 외곽 경계로부터 300m 이내** 정류소를 추출합니다. 원자료 폴리곤에 300m를 추가하는 기준이며 중심점 반경 300m와 다릅니다.
 4. 월별 48개 시간대 승하차 열을 합산하고 정류소별로 집계한 뒤, 1월 31일·2월 28일로 나눕니다. 결과표·그림은 **양월 공통 정류소**의 월별 일평균을 같은 비중으로 평균합니다.
 5. 병원·종합병원 283개 기록을 대상으로 사고지역 중심점에서 최근접 시설까지 직선거리를 계산합니다.
 
@@ -70,5 +74,7 @@ python scripts/run_ai.py
 | `bus_daily.csv.gz` | [서울시 버스노선별 정류장별 시간대별 승하차 인원 정보](https://data.seoul.go.kr/dataList/OA-12913/S/1/datasetView.do), 2026년 1·2월 | 월별 원자료 42,282/42,410행의 시간대 승하차 합산 → 정류소별 집계 → 월별 일수로 나눈 일평균 |
 
 원본 CSV의 SHA-256, 행 수와 출처는 [data/provenance.json](data/provenance.json)에 기록했습니다. 전처리본을 원기관 원본 파일로 오인하지 않도록 구분합니다. 데이터 권리는 각 제공기관에 있으며 공개·활용 조건은 위 원출처를 따릅니다.
+
+`provenance.json`의 `source_csv_sha256`는 수집 자료를 UTF-8 CSV로 변환·선별한 로컬 중간 파일의 해시입니다. 제공기관 다운로드 원본의 바이트 해시와 구분합니다. 공개 저장소에 포함된 4개 gzip 파일의 해시는 [data/checksums.json](data/checksums.json)에 별도로 기록했습니다. 이 저장소의 기본 재현 범위는 포함된 전처리본부터 결과 산출까지입니다.
 
 탄소중립 정책 제안의 참고문헌: Stolaroff, J. K. et al. (2018), *Energy use and life cycle greenhouse gas emissions of drones for commercial package delivery*, Nature Communications 9, 409. [DOI](https://doi.org/10.1038/s41467-017-02411-5). 배송 연구의 감축률을 본 사업에 적용하지 않았습니다.

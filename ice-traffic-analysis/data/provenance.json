@@ -1,0 +1,45 @@
+{
+  "description": "보고서 재현용 공개자료 전처리본. 원본 월간 48개 시간대 승하차 열을 합산하고 일수로 나눈 정류소별 일평균. 병원은 영업중·좌표보유 병원/종합병원만 포함. 개인 연락처·사업자명·인허가 식별정보 제외.",
+  "source_csv_sha256": {
+    "결빙사고다발지역_2021_2025_서울.csv": "3ff5123bcef7c7cfcc43e2b5f94ef47379be46763ffa976971548be675618569",
+    "서울시_버스정류소위치_20260108.csv": "64e5ce367c0964550fd225fd398ddce5e09be5fc3d40586c81f6d06bc4255538",
+    "서울시_병원인허가_영업중_좌표보유.csv": "fc75778d88fc5628d6ffd74db1d418dc5d47912dd3d02e38f8de63bf11243550",
+    "서울시_버스승하차_202601.csv": "bce1d29549aaae385b64cc3366b0ec57506f5d9ff2da21d7fdc38e40239b25ac",
+    "서울시_버스승하차_202602.csv": "d44cf975ed154a7bb6422048c9f0f2fd2763197d7545c35eb9f14681bdfb15ae"
+  },
+  "source_rows": {
+    "accidents": 24,
+    "stops": 11237,
+    "hospitals_selected": 283,
+    "bus_202601": 42282,
+    "bus_202602": 42410
+  },
+  "bus_join_coverage": [
+    {
+      "month": "202601",
+      "all_stop_ids": 12514,
+      "matched_stop_ids": 10663,
+      "matched_daily_events_share": 0.9543947968980344
+    },
+    {
+      "month": "202602",
+      "all_stop_ids": 12514,
+      "matched_stop_ids": 10661,
+      "matched_daily_events_share": 0.9531849435487493
+    }
+  ],
+  "sources": {
+    "accidents": "https://opendata.koroad.or.kr/api/selectFreezingDataSet.do",
+    "codebook": "https://opendata.koroad.or.kr/api/down/accidenthazard_codelist_down.jsp",
+    "stops": "https://data.seoul.go.kr/dataList/OA-15067/S/1/datasetView.do",
+    "hospitals": "https://data.seoul.go.kr/dataList/OA-16479/S/1/datasetView.do",
+    "bus": "https://data.seoul.go.kr/dataList/OA-12913/S/1/datasetView.do"
+  },
+  "packaging": {
+    "filter": "사고지역 폴리곤 경계 500m 이내 정류소만 수록. 100/300/500m 분석에 사용되는 모든 정류소를 보존하며, 전체 정류소 입력 결과와 동일함.",
+    "stops_in_package": 747,
+    "monthly_stop_records_in_package": 1370,
+    "original_pilot_missing_location_stops": 570,
+    "original_report_missing_location_stops": 574
+  }
+}

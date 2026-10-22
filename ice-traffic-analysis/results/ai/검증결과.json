@@ -1,0 +1,112 @@
+{
+  "scope": "서울 사고지역 24개에 대한 탐색적 관리 특성 군집분석. 드론 탐지/결빙예측/도로망 접근성 분석 아님.",
+  "features": [
+    "사고건수",
+    "사고당사상자수",
+    "일평균승하차건수_300m",
+    "최근접병원직선거리_m"
+  ],
+  "log1p_then_standard_scaler": true,
+  "k_search": [
+    {
+      "k": 2,
+      "silhouette": 0.4509829748871898,
+      "sizes": [
+        2,
+        22
+      ],
+      "min_cluster_size": 2
+    },
+    {
+      "k": 3,
+      "silhouette": 0.39145574108501585,
+      "sizes": [
+        18,
+        4,
+        2
+      ],
+      "min_cluster_size": 2
+    },
+    {
+      "k": 4,
+      "silhouette": 0.3186657484513413,
+      "sizes": [
+        8,
+        4,
+        10,
+        2
+      ],
+      "min_cluster_size": 2
+    }
+  ],
+  "selected_k": 2,
+  "selected_silhouette": 0.4509829748871898,
+  "seed_ARI_min": 0.24035230038243133,
+  "seed_ARI_mean": 0.4448011845536016,
+  "leave_one_out_ARI_min": -0.03103448275862069,
+  "leave_one_out_ARI_median": 0.41244774732930795,
+  "radius_sensitivity": [
+    {
+      "radius_m": 100,
+      "ARI_vs_300m": -0.033277870216306155,
+      "silhouette": 0.21042623668651406
+    },
+    {
+      "radius_m": 300,
+      "ARI_vs_300m": 1.0,
+      "silhouette": 0.4509829748871898
+    },
+    {
+      "radius_m": 500,
+      "ARI_vs_300m": 1.0,
+      "silhouette": 0.4615407020439836
+    }
+  ],
+  "feature_ablation": [
+    {
+      "removed_feature": "사고건수",
+      "ARI_vs_full": 0.31952662721893493
+    },
+    {
+      "removed_feature": "사고당사상자수",
+      "ARI_vs_full": 1.0
+    },
+    {
+      "removed_feature": "일평균승하차건수_300m",
+      "ARI_vs_full": -0.011273957158962795
+    },
+    {
+      "removed_feature": "최근접병원직선거리_m",
+      "ARI_vs_full": 1.0
+    }
+  ],
+  "permuted_best_silhouette_mean": 0.415855162489435,
+  "permutation_exceedance_fraction": 0.38613861386138615,
+  "null_note": "탐색적 참고값이며 표본 설계에 기반한 유의성 검정 또는 예측 정확도가 아님.",
+  "bus_join_coverage": [
+    {
+      "month": "202601",
+      "all_stop_ids": 12514,
+      "matched_stop_ids": 10663,
+      "matched_daily_events_share": 0.9543947968980344
+    },
+    {
+      "month": "202602",
+      "all_stop_ids": 12514,
+      "matched_stop_ids": 10661,
+      "matched_daily_events_share": 0.9531849435487493
+    }
+  ],
+  "location_stops_without_matched_usage": 570,
+  "hospital_points": 283,
+  "hospital_note": "영업중·좌표보유 병원/종합병원 현황. 최근접 직선거리는 도로 접근시간이나 통행장애 영향이 아님.",
+  "temporal_note": "2021~2025 사고 집계, 2026년1~2월 이용량, 확보시점 병원현황 결합. 인과효과 추정 아님.",
+  "versions": {
+    "python": "3.12.14",
+    "sklearn": "1.9.1",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "pyproj": "3.8.0",
+    "shapely": "2.2.0"
+  }
+}

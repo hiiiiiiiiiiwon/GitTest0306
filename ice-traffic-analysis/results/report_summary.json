@@ -1,0 +1,12 @@
+{
+  "areas": 24,
+  "crash_record_sum": 78,
+  "casualty_record_sum": 116,
+  "areas_with_3_crashes": 17,
+  "location_stops_excluded_no_common_month_records": 574,
+  "hospital_straight_distance_m": {
+    "min": 30.811847588356688,
+    "median": 461.4360893313787,
+    "max": 1697.926977670465
+  }
+}
